@@ -16,9 +16,7 @@ if [[ "$1" == "" || "$1" == "-h" ]] ; then
    exit 1 ;
 fi ;
 
-dir=$(readlink -f $1) ;
-
-cd $dir ;
+cd $1 ;
 for i in *.gz ; do
    gunzip $i ;
 done
