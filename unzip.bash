@@ -7,16 +7,6 @@
 #SBATCH -o unzip-%j.out             # Output file for this job.
 #SBATCH --account=coa_mki314_uksr     # Project allocation account name (REQUIRED)
 
-if [[ "$1" == "" || "$1" == "-h" ]] ; then
-   echo "
-   Usage: ./RUNME.bash folder queue QOS
-
-   folder	Path to the folder containing the zipped reads. The zipped reads must have .gz file type.
-      " >&2 ;
-   exit 1 ;
-fi ;
-
-cd $1 ;
 for i in *.gz ; do
    gunzip $i ;
 done
