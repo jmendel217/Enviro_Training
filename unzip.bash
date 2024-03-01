@@ -7,6 +7,7 @@
 #SBATCH -o unzip-%j.out             # Output file for this job.
 #SBATCH --account=coa_mki314_uksr     # Project allocation account name (REQUIRED)
 
+cd /scratch/jwme229/unzip_test
 for i in "*.gz" ; do
    gunzip $i ;
 done
