@@ -22,7 +22,7 @@ name_dir="$1"
 for fname in "$name_dir"/*.fastq; do
   name="${fname%\.*}"
   extension="${fname#$name}"
-  newname="${name//./_}"
+  newname="${name//_/.}"
   newfname="$newname""$extension"
   if [ "$fname" != "$newfname" ]; then
     echo mv "$fname" "$newfname"
