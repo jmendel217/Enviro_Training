@@ -7,6 +7,6 @@
 #SBATCH -o unzip-%j.out             # Output file for this job.
 #SBATCH --account=coa_mki314_uksr     # Project allocation account name (REQUIRED)
 
-for i in *.gz ; do
+for i in "*.gz" ; do
    gunzip $i ;
 done
