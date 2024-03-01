@@ -19,7 +19,7 @@ fi ;
 name_dir="$1"
 
 # Iterate over each file in the specified directory
-for fname in "$name_dir"/*.fastq; do
+for fname in "$name_dir"*.fastq; do
   name="${fname%\.*}"
   extension="${fname#$name}"
   newname="${name//_/.}"
