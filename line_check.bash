@@ -21,7 +21,7 @@ touch "name_dir"/lines.txt
 
 # Iterate over each file in the specified directory
 for i in "name_dir"/*.fastq; do
-  line_count=$(wc -l "i")
+  line_count=$(wc -l "$i")
   echo "$i: $line_count;" >> "lines.txt"
 done
   
