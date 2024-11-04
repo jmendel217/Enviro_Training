@@ -17,10 +17,10 @@ fi ;
 
 # Specify the directory containing your files with "_#.fastq"
 name_dir="$1"
-touch "name_dir"/lines.txt
+> "$name_dir"/lines.txt
 
 # Iterate over each file in the specified directory
-for i in "name_dir"/*.fastq; do
+for i in "$name_dir"/*.fastq; do
   line_count=$(wc -l "$i")
   echo "$i: $line_count;" >> "lines.txt"
 done
