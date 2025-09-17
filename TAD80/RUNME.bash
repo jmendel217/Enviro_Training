@@ -9,7 +9,7 @@ if [[ "$1" == "" || "$1" == "-h" ]] ; then
                of the sample, and <sis> is 1 or 2 indicating which sister read the file contains.
                Use only '1' as <sis> if you have single reads.
    partition   Select a partition (If not provided, coa_mki314_uksr will be used).
-   qos		     Select a quality of service (If not provided, normal will be used).
+   qos		   Select a quality of service (If not provided, normal will be used).
    
    " >&2 ;
    exit 1 ;
@@ -47,12 +47,6 @@ for i in $dir/16.checkm2/output/good_quality/*.fa ; do
    # Launch job
    sbatch --export="$OPTS" -J "Trim-$b" --account=$QUEUE --partition=$QOS --error "$dir"/zz.out/"TAD80-$b"-%j.err -o "$dir"/zz.out/"TAD80-$b"-%j.out  $pac/run.pbs | grep .;
 done ;
-
-#---------------------------------------------------------
-# Combine statistics outputs
-
-#cd $dir/zz.stats
-#paste *stats.txt  > bmtagger_statistics.txt
 
 #---------------------------------------------------------
 
