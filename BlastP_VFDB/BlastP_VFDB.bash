@@ -24,7 +24,14 @@ cd $dir
 if [[ ! -e 11.bakta ]] ; then
    echo "Cannot locate the 11.bakta directory, aborting..." >&2
    exit 1
+elif [[ ! -e 13.vfdb ]] ; then
+   echo "Cannot locate the 13.vfdb directory, aborting..." >&2
+   exit 1
 fi ;
+
+for i in 13.vfdb/blastp ; do
+   [[ -d $i ]] || mkdir $i
+done
 
 # Change enveomics & blastp paths to yours
 enve=/project/mki314_uksr/enveomics/Scripts
@@ -34,7 +41,7 @@ blastp=/project/mki314_uksr/Software/ncbi-blast-2.15.0+/bin/blastp
 source /project/mki314_uksr/miniconda3/etc/profile.d/conda.sh
 
 # These paths should remain the same
-VFDB=$FOLDER/13.vfdb/VFDB_setA_pro_edited
+VFDB=$dir/13.vfdb/VFDB_setA_pro_edited
 
 # The number of CPUs or threads
 THR=32
@@ -42,11 +49,15 @@ THR=32
 #---------------------------------------------------------
 # Run blastp search against VFDB database
 
-cd $dir/11.bakta/results ;
+cd $dir ;
 for $i in $dir/11.bakta/results/* ; do
    b=$(basename $i)
-   $blastp -query ./$b/$b.faa -db $VFDB -max_target_seq 5 -num_threads $THR \
-   -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qlen slen" > $b_VFDB.blastp
-   
+   $blastp -query ./11.bakta/results/$b/$b.faa -db $VFDB -max_target_seq 5 -num_threads $THR \
+   -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qlen slen" > ./13.vfdb/blastp/$b_VFDB.blastp
+   perl $enve/BlastTab.best_hit_sorted.pl ./13.vfdb/blastp/$b_VFDB.blastp > ./13.vfdb/blastp/$b_VFDB.bh.blastp
+   awk '{if($12 >= 55 && $3 >= 40)print$0}' ./13.vfdb/blastp/$b_VFDB.bh.blastp > ./13.vfdb/blastp/$b_VFDB.bh.filt.blastp
+done
 
+#---------------------------------------------------------
 
+echo "Done: $(date)." ;
