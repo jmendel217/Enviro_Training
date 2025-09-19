@@ -52,7 +52,7 @@ THR=32
 cd $dir ;
 for i in $dir/11.bakta/results/* ; do
    b=$(basename $i)
-   $blastp -query ./11.bakta/results/$b/$b.faa -db $VFDB -max_target_seq 5 -num_threads $THR \
+   $blastp -query ./11.bakta/results/$b/$b.faa -db $VFDB -max_target_seqs 5 -num_threads $THR \
    -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qlen slen" > ./13.vfdb/blastp/$b_VFDB.blastp
    perl $enve/BlastTab.best_hit_sorted.pl ./13.vfdb/blastp/$b_VFDB.blastp > ./13.vfdb/blastp/$b_VFDB.bh.blastp
    awk '{if($12 >= 55 && $3 >= 40)print$0}' ./13.vfdb/blastp/$b_VFDB.bh.blastp > ./13.vfdb/blastp/$b_VFDB.bh.filt.blastp
