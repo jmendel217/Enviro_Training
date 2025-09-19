@@ -50,7 +50,7 @@ THR=32
 # Run blastp search against VFDB database
 
 cd $dir ;
-for $i in $dir/11.bakta/results/* ; do
+for i in $dir/11.bakta/results/* ; do
    b=$(basename $i)
    $blastp -query ./11.bakta/results/$b/$b.faa -db $VFDB -max_target_seq 5 -num_threads $THR \
    -outfmt "6 qseqid sseqid pident length mismatch gapopen qstart qend sstart send evalue bitscore qlen slen" > ./13.vfdb/blastp/$b_VFDB.blastp
