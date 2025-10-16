@@ -40,7 +40,7 @@ for i in $SRCE/*.fastq ; do
    b=$(basename $i .fastq)
    OPTS="SAMPLE=$b,FOLDER=$SRCE"
    # Launch job
-   sbatch --export="$OPTS" -J "Copy-$b" --account=$QUEUE --partition=$QOS --error "$DEST"/"Copy-$b"-%j.err -o "$DEST"/"Copy-$b"-%j.out  $pac/run.pbs | grep .;
+   sbatch --export="$OPTS" -J "Copy-$b" --account=$QUEUE --partition=$QOS --error "$DEST"/"Copy-$b"-%j.err -o "$DEST"/"Copy-$b"-%j.out  $pac/copy_run.pbs | grep .;
 done
 
 #---------------------------------------------------------
