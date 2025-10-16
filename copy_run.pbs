@@ -8,6 +8,6 @@ b=$SAMPLE
 #---------------------------------------------------------
 # Copy files
 
-cp $SRCE/$b.fasta $DEST/.
+cp $SRCE/$b.fastq $DEST/.
 
 echo "Done: $(date)." ;
