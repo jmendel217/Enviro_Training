@@ -1,0 +1,13 @@
+#!/bin/bash
+#SBATCH --nodes=1
+#SBATCH --ntasks=4
+#SBATCH -t 04:00:00
+
+b=$SAMPLE
+
+#---------------------------------------------------------
+# Copy files
+
+cp $SRCE/$b.fasta $DEST/.
+
+echo "Done: $(date)." ;
